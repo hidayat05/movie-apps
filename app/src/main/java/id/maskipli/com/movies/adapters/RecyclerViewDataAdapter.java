@@ -1,6 +1,7 @@
 package id.maskipli.com.movies.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,75 +9,112 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import id.maskipli.com.movies.Models.SectionDataModel;
 import id.maskipli.com.movies.R;
-
-import static java.lang.Boolean.FALSE;
+import id.maskipli.com.movies.SearchActivity;
 
 /**
  * Created by hidayat on 11/17/16.
  */
 
-public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.ItemHolder> {
-    private ArrayList<SectionDataModel> dataList;
-    private Context context;
+public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.ItemRowHolder> {
 
+    private List<SectionDataModel> dataList;
+    private Context mContext;
 
-    public RecyclerViewDataAdapter(Context context, ArrayList<SectionDataModel> dataList) {
+    public RecyclerViewDataAdapter(Context context, List<SectionDataModel> dataList) {
         this.dataList = dataList;
-        this.context = context;
+        this.mContext = context;
     }
 
     @Override
-    public ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
-        ItemHolder itemHolder = new ItemHolder(view);
-        return itemHolder;
+    public ItemRowHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, null);
+        ItemRowHolder mh = new ItemRowHolder(v);
+        return mh;
     }
 
     @Override
-    public void onBindViewHolder(ItemHolder holder, int position) {
-        final String originalTitle = dataList.get(position).getHeaderTitle();
-        ArrayList arrayList = dataList.get(position).getMovieObjectArrayList();
-        holder.itemTitle.setText(originalTitle);
+    public void onBindViewHolder(ItemRowHolder itemRowHolder, int i) {
 
-        SectionListDataAdapter sectionListDataAdapter = new SectionListDataAdapter(context, arrayList);
+        final String sectionName = dataList.get(i).getHeaderTitle();
 
-        holder.recyclerView.setHasFixedSize(true);
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, FALSE));
-        holder.recyclerView.setAdapter(sectionListDataAdapter);
-        holder.recyclerView.setNestedScrollingEnabled(false);
-        holder.button.setOnClickListener(new View.OnClickListener() {
+        List singleSectionItems = dataList.get(i).getAllItemsInSection();
+
+        itemRowHolder.itemTitle.setText(sectionName);
+
+        SectionListDataAdapter itemListDataAdapter = new SectionListDataAdapter(mContext, singleSectionItems);
+
+        itemRowHolder.recycler_view_list.setHasFixedSize(true);
+        itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+        itemRowHolder.recycler_view_list.setAdapter(itemListDataAdapter);
+
+
+        itemRowHolder.recycler_view_list.setNestedScrollingEnabled(false);
+
+
+       /*  itemRowHolder.recycler_view_list.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        //Allow ScrollView to intercept touch events once again.
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+                // Handle RecyclerView touch events.
+                v.onTouchEvent(event);
+                return true;
+            }
+        });*/
+
+        itemRowHolder.btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "disini untuk more", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra(SearchActivity.CATEGORY, sectionName);
+                v.getContext().startActivity(intent);
             }
         });
 
-
+       /* Glide.with(mContext)
+                .load(feedItem.getImageURL())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .error(R.drawable.bg)
+                .into(feedListRowHolder.thumbView);*/
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return (null != dataList ? dataList.size() : 0);
     }
 
-    public class ItemHolder extends RecyclerView.ViewHolder {
+    public class ItemRowHolder extends RecyclerView.ViewHolder {
 
         protected TextView itemTitle;
-        protected RecyclerView recyclerView;
-        protected Button button;
 
-        public ItemHolder(View itemView) {
+        protected RecyclerView recycler_view_list;
 
-            super(itemView);
-            this.itemTitle = (TextView) itemView.findViewById(R.id.itemTitle);
-            this.recyclerView = (RecyclerView) itemView.findViewById(R.id.recycler_view_list);
-            this.button = (Button) itemView.findViewById(R.id.btnMore);
+        protected Button btnMore;
+
+        public ItemRowHolder(View view) {
+            super(view);
+            this.itemTitle = (TextView) view.findViewById(R.id.itemTitle);
+            this.recycler_view_list = (RecyclerView) view.findViewById(R.id.recycler_view_list);
+            this.btnMore = (Button) view.findViewById(R.id.btnMore);
+            itemTitle.setAllCaps(true);
+
         }
+
     }
 }

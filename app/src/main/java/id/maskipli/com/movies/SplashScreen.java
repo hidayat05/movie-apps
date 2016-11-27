@@ -1,11 +1,8 @@
 package id.maskipli.com.movies;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
-import android.view.View;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -35,9 +32,4 @@ public class SplashScreen extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        return super.onCreateView(name, context, attrs);
-
-    }
 }

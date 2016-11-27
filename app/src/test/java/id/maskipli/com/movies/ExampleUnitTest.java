@@ -2,6 +2,8 @@ package id.maskipli.com.movies;
 
 import org.junit.Test;
 
+import id.maskipli.com.movies.Util.MovieConstants;
+
 import static org.junit.Assert.*;
 
 /**
@@ -14,4 +16,11 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void cekUrl () throws Exception{
+        String getSearch = MovieConstants.getAllItem(MovieConstants.UPCOMING);
+        System.out.println(getSearch);
+    }
+
 }

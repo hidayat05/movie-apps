@@ -5,8 +5,6 @@
     <color name="colorAccent">#FF4081</color>
 
 
-
-
     <color name="teal_050">#e0f2f1</color> <!-- Use with black text -->
     <color name="teal_100">#b2dfdb</color> <!-- Use with black text -->
     <color name="teal_200">#80cbc4</color> <!-- Use with black text -->
@@ -20,6 +18,8 @@
     <color name="teal_a100">#a7ffeb</color> <!-- Use with black text -->
     <color name="teal_a200">#64ffda</color> <!-- Use with black text -->
     <color name="teal_a400">#1de9b6</color> <!-- Use with black text -->
-    <color name="teal_a700">#00bfa5</color> <!-- Use with black text -->
+    <color name="teal_a700">#00bfa5</color>
+    <color name="white_transparent">#90ffffff</color>
+    <color name="black_overlay">#66000000</color> <!-- Use with black text -->
 
 </resources>

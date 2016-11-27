@@ -1,6 +1,7 @@
 package id.maskipli.com.movies.Models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hidayat on 11/17/16.
@@ -9,26 +10,29 @@ import java.util.ArrayList;
 public class SectionDataModel {
 
     private String headerTitle;
-    private ArrayList<MovieObject> movieObjectArrayList;
+    private List<SingleItemModel> allItemsInSection;
+
 
     public SectionDataModel() {
+    }
+    public SectionDataModel(String headerTitle, ArrayList<SingleItemModel> allItemsInSection) {
+        this.headerTitle = headerTitle;
+        this.allItemsInSection = allItemsInSection;
+    }
 
+    public String getHeaderTitle() {
+        return headerTitle;
     }
 
     public void setHeaderTitle(String headerTitle) {
         this.headerTitle = headerTitle;
     }
 
-    public void setMovieObjectArrayList(ArrayList<MovieObject> movieObjectArrayList) {
-        this.movieObjectArrayList = movieObjectArrayList;
+    public List<SingleItemModel> getAllItemsInSection() {
+        return allItemsInSection;
     }
 
-    public String getHeaderTitle() {
-
-        return headerTitle;
-    }
-
-    public ArrayList<MovieObject> getMovieObjectArrayList() {
-        return movieObjectArrayList;
+    public void setAllItemsInSection(List<SingleItemModel> allItemsInSection) {
+        this.allItemsInSection = allItemsInSection;
     }
 }
