@@ -22,9 +22,9 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_toLeftOf="@+id/btnMore"
-            android:text="Sample title"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnMore"
@@ -33,9 +33,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:theme="@style/MyButton"
-            android:text="more"
-            android:textColor="#FFF" />
+            android:background="@android:color/transparent"
+            android:text="MORE"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14dp" />
 
 
     </RelativeLayout>

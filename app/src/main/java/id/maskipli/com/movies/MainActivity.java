@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
     ArrayList<SectionDataModel> allSampleData;
     Toolbar toolbar;
+    RecyclerView myRecyclerView;
+    RecyclerViewDataAdapter adapter;
 
 
     @Override
@@ -44,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         getListData();
         allSampleData = new ArrayList<SectionDataModel>();
 
-        RecyclerView myRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        RecyclerViewDataAdapter adapter = new RecyclerViewDataAdapter(this, allSampleData);
+        myRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        adapter = new RecyclerViewDataAdapter(this, allSampleData);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         myRecyclerView.setAdapter(adapter);
 
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 dm.setAllItemsInSection(singleItem);
                 allSampleData.add(dm);
                 dm.setHeaderTitle(category);
+                adapter.notifyDataSetChanged();
+
 
 //                if (category.contains("_")) {
 //                    String header = category.replaceAll("[^a-zA-Z]", " ");

@@ -5,4 +5,8 @@
     <integer name="grid_span_1">1</integer>
     <integer name="grid_span_2">2</integer>
     <integer name="grid_span_3">3</integer>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="anchor_point">300dp</dimen>
+    <dimen name="bottom_sheet_peek_height">80dp</dimen>
+    <string name="key_binding_default_toolbar_name">Modal-Toolbar-Title</string>
 </resources>

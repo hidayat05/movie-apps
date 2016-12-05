@@ -1,12 +1,15 @@
 package id.maskipli.com.movies.Models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by hidayat on 11/22/16.
  */
 
-public class SingleItemModel {
+public class SingleItemModel implements Parcelable{
 
     @SerializedName("poster_path")
     private String poster_path;
@@ -31,6 +34,46 @@ public class SingleItemModel {
 
     @SerializedName("genre_ids")
     private int[] genre_ids;
+
+    protected SingleItemModel(Parcel in) {
+        poster_path = in.readString();
+        original_title = in.readString();
+        overview = in.readString();
+        release_date = in.readString();
+        backdrop_path = in.readString();
+        vote_average = in.readFloat();
+        id = in.readString();
+        genre_ids = in.createIntArray();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(poster_path);
+        dest.writeString(original_title);
+        dest.writeString(overview);
+        dest.writeString(release_date);
+        dest.writeString(backdrop_path);
+        dest.writeFloat(vote_average);
+        dest.writeString(id);
+        dest.writeIntArray(genre_ids);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<SingleItemModel> CREATOR = new Creator<SingleItemModel>() {
+        @Override
+        public SingleItemModel createFromParcel(Parcel in) {
+            return new SingleItemModel(in);
+        }
+
+        @Override
+        public SingleItemModel[] newArray(int size) {
+            return new SingleItemModel[size];
+        }
+    };
 
     public String getOverview() {
         return overview;

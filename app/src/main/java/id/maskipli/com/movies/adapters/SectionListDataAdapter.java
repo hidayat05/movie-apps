@@ -2,6 +2,7 @@ package id.maskipli.com.movies.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
     }
 
     @Override
-    public void onBindViewHolder(SingleItemRowHolder holder, int i) {
+    public void onBindViewHolder(SingleItemRowHolder holder, final int i) {
 
         SingleItemModel singleItem = itemsList.get(i);
 
@@ -55,6 +56,14 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .into(holder.itemImage);
+        holder.mainContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                intent.putExtra(DetailActivity.DETAIL, (Parcelable) itemsList.get(i));
+                v.getContext().startActivity(intent);
+            }
+        });
 
         Log.e(this.getClass().getSimpleName(), "value of image " + singleItem.getPoster_path());
     }
@@ -84,21 +93,14 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
 
         protected String id;
 
+        protected View mainContent;
+
 
         public SingleItemRowHolder(View view) {
             super(view);
             this.tvTitle = (TextView) view.findViewById(R.id.tvTitle);
             this.itemImage = (ImageView) view.findViewById(R.id.itemImage);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                    intent.putExtra(DetailActivity.DETAIL, id);
-                    v.getContext().startActivity(intent);
-                }
-            });
-
-
+            this.mainContent = view.findViewById(R.id.main_content);
         }
 
     }
