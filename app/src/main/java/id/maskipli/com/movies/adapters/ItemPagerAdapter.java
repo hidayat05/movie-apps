@@ -1,29 +1,38 @@
 package id.maskipli.com.movies.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+
+import java.util.List;
+
+import id.maskipli.com.movies.Models.GetPosterAndBackdrop;
 import id.maskipli.com.movies.R;
+import id.maskipli.com.movies.Util.MovieConstants;
 
 public class ItemPagerAdapter extends android.support.v4.view.PagerAdapter {
 
     Context mContext;
     LayoutInflater mLayoutInflater;
-    final int[] mItems;
 
-    public ItemPagerAdapter(Context context, int[] items) {
+    private List<GetPosterAndBackdrop.Backdrops> data;
+
+    public ItemPagerAdapter(Context context, List<GetPosterAndBackdrop.Backdrops> data) {
+        this.data = data;
         this.mContext = context;
         this.mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.mItems = items;
+
     }
 
     @Override
     public int getCount() {
-        return mItems.length;
+        return data.size();
     }
 
     @Override
@@ -33,9 +42,15 @@ public class ItemPagerAdapter extends android.support.v4.view.PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        final String getImage = data.get(position).getFile_path();
+        Log.e(getClass().getSimpleName(), "uri image = " + MovieConstants.getPosterHight(getImage));
+
         View itemView = mLayoutInflater.inflate(R.layout.pager_item, container, false);
+
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
-        imageView.setImageResource(mItems[position]);
+        Glide.with(mContext)
+                .load(MovieConstants.getPosterHight(getImage))
+                .into(imageView);
         container.addView(itemView);
         return itemView;
     }

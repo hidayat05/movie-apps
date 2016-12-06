@@ -2,7 +2,6 @@ package id.maskipli.com.movies.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,7 +51,7 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
         holder.id = singleItem.getId();
 
         Glide.with(holder.itemImage.getContext())
-                .load(MovieConstants.getPosterUrl(singleItem.getPoster_path()))
+                .load(MovieConstants.getPosterSmall(singleItem.getPoster_path()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .into(holder.itemImage);
@@ -60,12 +59,13 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DetailActivity.class);
-                intent.putExtra(DetailActivity.DETAIL, (Parcelable) itemsList.get(i));
+                intent.putExtra(DetailActivity.DETAIL, itemsList.get(i));
                 v.getContext().startActivity(intent);
             }
         });
 
         Log.e(this.getClass().getSimpleName(), "value of image " + singleItem.getPoster_path());
+        Log.e(this.getClass().getSimpleName(), "value of backdrop " + singleItem.getBackdrop_path());
     }
 
     public SectionListDataAdapter(List<SingleItemModel> singleItemModels) {

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by hidayat on 11/22/16.
  */
 
-public class SingleItemModel implements Parcelable{
+public class SingleItemModel implements Parcelable {
 
     @SerializedName("poster_path")
     private String poster_path;
@@ -123,9 +123,14 @@ public class SingleItemModel implements Parcelable{
         this.genre_ids = genre_ids;
     }
 
-    public SingleItemModel(String original_title, String poster_path) {
+    public SingleItemModel(String original_title, String poster_path, String overview, String release_date, String backdrop_path, String id, int[] genre_id) {
         this.original_title = original_title;
         this.poster_path = poster_path;
+        this.overview = overview;
+        this.release_date = release_date;
+        this.backdrop_path = backdrop_path;
+        this.id = id;
+        this.genre_ids = genre_id;
     }
 
     public String getOriginal_title() {

@@ -1,10 +1,12 @@
 package id.maskipli.com.movies;
 
+import android.content.Context;
+
 import org.junit.Test;
 
 import id.maskipli.com.movies.Util.MovieConstants;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -12,6 +14,10 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
+    Context context ;
+
+
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
@@ -22,5 +28,7 @@ public class ExampleUnitTest {
         String getSearch = MovieConstants.getAllItem(MovieConstants.UPCOMING);
         System.out.println(getSearch);
     }
+
+
 
 }

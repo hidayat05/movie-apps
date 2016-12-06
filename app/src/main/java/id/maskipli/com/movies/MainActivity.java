@@ -82,13 +82,15 @@ public class MainActivity extends AppCompatActivity {
     public void getListData() {
         String category = "";
         requestUtil = new RequestUtil();
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 4; i++) {
             if (i == 1) {
                 category = MovieConstants.POPULAR;
             } else if (i == 2) {
                 category = MovieConstants.TOP_RATED;
             } else if (i == 3) {
                 category = MovieConstants.UPCOMING;
+            } else if (i == 4) {
+                category = MovieConstants.NOW_PLAYING;
             }
             getDataMovie(category);
         }
@@ -106,7 +108,13 @@ public class MainActivity extends AppCompatActivity {
 
                 ArrayList<SingleItemModel> singleItem = new ArrayList<SingleItemModel>();
                 for (SingleItemModel item : list.getResults()) {
-                    singleItem.add(new SingleItemModel(item.getOriginal_title(), item.getPoster_path()));
+                    singleItem.add(new SingleItemModel(item.getOriginal_title()
+                            , item.getPoster_path()
+                            , item.getOverview()
+                            , item.getRelease_date()
+                            , item.getBackdrop_path()
+                            , item.getId()
+                            , item.getGenre_ids()));
                 }
                 SectionDataModel dm = new SectionDataModel();
                 dm.setAllItemsInSection(singleItem);

@@ -11,6 +11,8 @@ public class MovieConstants {
     public static final String UPCOMING = "upcoming";
     public static final String TOP_RATED = "top_rated";
     public static final String POPULAR = "popular";
+    public static final String NOW_PLAYING = "now_playing";
+    public static final String LATEST= "latest";
 
 
     public static String getAllItem(String category) {
@@ -21,27 +23,40 @@ public class MovieConstants {
         return BASE_URL + "movie/" + category + "?" + API_KEY + "&page=" + page;
     }
 
-    public static String getPopular() {
-        return BASE_URL + POPULAR + API_KEY;
-    }
-
-    public static String getTopRated() {
-        return BASE_URL + TOP_RATED + API_KEY;
-    }
-
-    public static String getUpcoming() {
-        return BASE_URL + UPCOMING + API_KEY;
-    }
-
     public static String getTrailerYoutube(String id) {
         return BASE_URL + id + VIDEO + API_KEY;
     }
 
-    public static String getPosterUrl(String posterPath) {
+    public static String getKeywords(String id) {
+        return BASE_URL + "movie/" + id + "/keywords?" + API_KEY;
+    }
+
+    public static String getReview(String id) {
+        return BASE_URL + "movie/" + id + "/reviews?" + API_KEY;
+    }
+
+    public static String getRecomendation(String id) {
+        return BASE_URL + "movie/" + id + "/recommendations?" + API_KEY;
+    }
+
+    public static String getAllOfPoster(String id) {
+        return BASE_URL + "movie/" + id + "/images?" + API_KEY;
+    }
+
+    public static String getPosterSmall(String posterPath) {
         return "https://image.tmdb.org/t/p/w185" + posterPath;
+    }
+
+    public static String getPosterHight(String posterPath) {
+        return "https://image.tmdb.org/t/p/w500" + posterPath;
     }
 
     public static String getSearch(String judul, int page) {
         return BASE_URL + "search/movie?&query=" + judul + "&" + API_KEY + "&page=" + page;
     }
+
+    public static String getGenreMovie() {
+        return BASE_URL + "genre/movie/list?" + API_KEY;
+    }
+
 }

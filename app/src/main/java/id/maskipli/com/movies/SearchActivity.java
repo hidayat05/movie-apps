@@ -3,13 +3,17 @@ package id.maskipli.com.movies;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -38,6 +42,8 @@ public class SearchActivity extends AppCompatActivity {
     TextView empty;
     private Boolean requestData = false;
     private GetMovieList movieList;
+    String headerOfToolbar;
+    ActionBar actionBar;
 
 
     @Override
@@ -49,11 +55,11 @@ public class SearchActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         empty = (TextView) findViewById(R.id.tv_empty);
-
-        ActionBar actionBar = getSupportActionBar();
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Search Result");
+            actionBar.setTitle(headerOfToolbar);
         }
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +72,48 @@ public class SearchActivity extends AppCompatActivity {
         requestData(1);
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        final MenuItem menuItem = menu.findItem(R.id.menu_search);
+        actionBar.setTitle(headerOfToolbar.toUpperCase());
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint(getString(R.string.search));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!TextUtils.isEmpty(query)) {
+                    MenuItemCompat.collapseActionView(menuItem);
+                    Intent openSearchActivity = new Intent(SearchActivity.this, SearchActivity.class);
+                    openSearchActivity.putExtra(SearchActivity.SEARCH_QUERY, query);
+                    openSearchActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    overridePendingTransition(0, 0);
+                    startActivity(openSearchActivity);
+                    finish();
+
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private String getURI(int page) {
         String uri = "";
         Intent intent = getIntent();
@@ -74,8 +122,10 @@ public class SearchActivity extends AppCompatActivity {
 
         if (!TextUtils.isEmpty(cari)) {
             uri = MovieConstants.getSearch(cari, page);
+            headerOfToolbar = "Search Result";
         } else if (!TextUtils.isEmpty(category)) {
             uri = MovieConstants.getAllItem(category, page);
+            headerOfToolbar = category.replace("_", " ");
         } else {
             Log.e(TAG, "intent is NULL");
         }

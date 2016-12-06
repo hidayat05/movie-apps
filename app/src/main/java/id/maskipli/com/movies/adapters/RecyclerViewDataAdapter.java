@@ -44,7 +44,8 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
         List singleSectionItems = dataList.get(i).getAllItemsInSection();
 
-        itemRowHolder.itemTitle.setText(sectionName);
+        String getSectionName = sectionName.replace("_", " ");
+        itemRowHolder.itemTitle.setText(getSectionName);
 
         SectionListDataAdapter itemListDataAdapter = new SectionListDataAdapter(mContext, singleSectionItems);
 
