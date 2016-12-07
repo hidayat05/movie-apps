@@ -77,13 +77,16 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
             }
         });*/
 
+        if (sectionName.contains(SearchActivity.RECOMENDATIONS)) {
+            itemRowHolder.btnMore.setVisibility(View.GONE);
+        }
         itemRowHolder.btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(v.getContext(), SearchActivity.class);
                 intent.putExtra(SearchActivity.CATEGORY, sectionName);
                 v.getContext().startActivity(intent);
+
             }
         });
 

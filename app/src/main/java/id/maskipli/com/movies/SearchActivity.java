@@ -35,26 +35,33 @@ public class SearchActivity extends AppCompatActivity {
     private static final int COUNT_COLOUM = 3;
     public static final String SEARCH_QUERY = "SEARCH_QUERY";
     public static final String CATEGORY = "category";
+    public static final String RECOMENDATIONS = "recomendations";
+
     int pastVisiblesItems, visibleItemCount, totalItemCount;
+    private Boolean requestData = false;
+    String headerOfToolbar;
+
     RecyclerView recyclerView;
     Toolbar toolbar;
     FloatingActionButton fab;
     TextView empty;
-    private Boolean requestData = false;
-    private GetMovieList movieList;
-    String headerOfToolbar;
     ActionBar actionBar;
 
+    private GetMovieList movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
+        setRecyclerView();
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
         empty = (TextView) findViewById(R.id.tv_empty);
+
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -62,13 +69,13 @@ public class SearchActivity extends AppCompatActivity {
             actionBar.setTitle(headerOfToolbar);
         }
 
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recyclerView.scrollToPosition(0);
             }
         });
-        setRecyclerView();
         requestData(1);
     }
 
@@ -152,14 +159,14 @@ public class SearchActivity extends AppCompatActivity {
                             recyclerView.setVisibility(View.GONE);
                             fab.setVisibility(View.GONE);
                         } else {
+                            empty.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+                            fab.setVisibility(View.VISIBLE);
                             if (page == 1) {
                                 recyclerView.setAdapter(new SectionListDataAdapter(movieList.getResults()));
                             } else {
                                 ((SectionListDataAdapter) recyclerView.getAdapter()).append(movieList.getResults());
                             }
-                            empty.setVisibility(View.GONE);
-                            recyclerView.setVisibility(View.VISIBLE);
-                            fab.setVisibility(View.VISIBLE);
                         }
                         requestData = false;
                     }

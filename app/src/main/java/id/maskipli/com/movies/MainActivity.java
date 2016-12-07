@@ -122,13 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 dm.setHeaderTitle(category);
                 adapter.notifyDataSetChanged();
 
-
-//                if (category.contains("_")) {
-//                    String header = category.replaceAll("[^a-zA-Z]", " ");
-//                    dm.setHeaderTitle(header);
-//                } else {
-//                    dm.setHeaderTitle(category);
-//                }
             }
 
             @Override

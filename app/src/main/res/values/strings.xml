@@ -24,4 +24,6 @@ limitations under the License. Lorem ipsum dolor sit amet, consectetuer adipisci
     <string name="ScrollAwareFABBehavior">id.maskipli.com.movies.lib.ScrollAwareFABBehavior</string>
     <string name="MergedAppBarLayoutBehavior">id.maskipli.com.movies.lib.MergedAppBarLayoutBehavior</string>
     <string name="ScrollingAppBarLayoutBehavior">id.maskipli.com.movies.lib.ScrollingAppBarLayoutBehavior</string>
+    <string name="overview">Overview</string>
+    <string name="review">Review</string>
 </resources>

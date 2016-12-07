@@ -25,7 +25,7 @@ public class ExampleUnitTest {
 
     @Test
     public void cekUrl () throws Exception{
-        String getSearch = MovieConstants.getAllItem(MovieConstants.UPCOMING);
+        String getSearch = MovieConstants.getRecomendation("550");
         System.out.println(getSearch);
     }
 

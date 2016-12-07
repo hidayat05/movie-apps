@@ -7,12 +7,13 @@ package id.maskipli.com.movies.Util;
 public class MovieConstants {
     public static final String BASE_URL = "http://api.themoviedb.org/3/";
     public static final String API_KEY = "api_key=d8fcb077e3b62f7d851f8c7833508966";
+    public static final String API_YOUTUBE = "AIzaSyCH32vqTa5AaDP4S4pXPiFx8D8fObP1Tak";
     public static final String VIDEO = "/videos";
     public static final String UPCOMING = "upcoming";
     public static final String TOP_RATED = "top_rated";
     public static final String POPULAR = "popular";
     public static final String NOW_PLAYING = "now_playing";
-    public static final String LATEST= "latest";
+    public static final String LATEST = "latest";
 
 
     public static String getAllItem(String category) {
@@ -25,6 +26,10 @@ public class MovieConstants {
 
     public static String getTrailerYoutube(String id) {
         return BASE_URL + id + VIDEO + API_KEY;
+    }
+
+    public static String getYoutube(String id) {
+        return BASE_URL + "movie/" + id + VIDEO + "?" + API_KEY;
     }
 
     public static String getKeywords(String id) {
