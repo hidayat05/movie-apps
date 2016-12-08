@@ -48,27 +48,6 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/button1"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_centerHorizontal="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_dialog_map" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="BUTTON 1"
-                android:textColor="@android:color/black" />
-        </RelativeLayout>
-
-
         <LinearLayout
             android:id="@+id/establecimiento_layout_favoritos_button"
             android:layout_width="wrap_content"
@@ -78,26 +57,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/button2"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_centerHorizontal="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_dialog_info" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BUTTON 2"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <ImageButton
-                android:id="@+id/establecimiento_share_button"
+                android:id="@+id/share"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_centerHorizontal="true"
@@ -105,12 +65,12 @@
                 android:src="@android:drawable/ic_menu_share" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="BUTTON 3"
-                android:textColor="@android:color/black" />
-        </RelativeLayout>
+                android:text="Share"
+                android:textAlignment="center" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -140,7 +100,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_video"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
 
         <TextView
             android:layout_width="match_parent"
@@ -155,11 +116,13 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_review"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_recomedation"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </LinearLayout>

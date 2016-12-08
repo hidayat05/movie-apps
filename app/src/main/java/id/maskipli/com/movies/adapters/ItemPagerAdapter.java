@@ -50,6 +50,7 @@ public class ItemPagerAdapter extends android.support.v4.view.PagerAdapter {
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
         Glide.with(mContext)
                 .load(MovieConstants.getPosterHight(getImage))
+                .error(R.drawable.no_image)
                 .into(imageView);
         container.addView(itemView);
         return itemView;

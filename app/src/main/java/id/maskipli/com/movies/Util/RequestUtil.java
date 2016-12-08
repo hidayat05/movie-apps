@@ -14,8 +14,11 @@ import com.android.volley.toolbox.Volley;
  */
 
 public class RequestUtil {
+
+    private OkHttp3Stack mOkHttp3Stack;
     public void getData(Context context, String url, final RequestResult requestResult) {
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        mOkHttp3Stack = new OkHttp3Stack();
+        RequestQueue requestQueue = Volley.newRequestQueue(context, mOkHttp3Stack);
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET, url, new Response.Listener<String>() {
             @Override

@@ -53,6 +53,7 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
                 .load(MovieConstants.getPosterSmall(singleItem.getPoster_path()))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
+                .error(R.drawable.no_image)
                 .into(holder.itemImage);
         holder.mainContent.setOnClickListener(new View.OnClickListener() {
             @Override

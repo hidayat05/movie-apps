@@ -1,5 +1,11 @@
 package id.maskipli.com.movies.Util;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+
+import id.maskipli.com.movies.R;
+
 /**
  * Created by hidayat on 11/17/16.
  */
@@ -62,6 +68,20 @@ public class MovieConstants {
 
     public static String getGenreMovie() {
         return BASE_URL + "genre/movie/list?" + API_KEY;
+    }
+
+
+    public static void shareText(String text, String extraSubject, Context ctx) {
+        Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        else
+            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, extraSubject);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+
+        ctx.startActivity(Intent.createChooser(shareIntent, ctx.getString(R.string.share_with)));
     }
 
 }

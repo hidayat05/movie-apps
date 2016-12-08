@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class DetailActivity extends AppCompatActivity {
 
     FloatingActionButton fab;
     ImageView imageLarge;
+    ImageButton share;
 
     private SingleItemModel data;
 
@@ -68,7 +70,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         requestUtil = new RequestUtil();
 
-
         imageLarge = (ImageView) findViewById(R.id.imagelarge);
         data = getIntent().getParcelableExtra(DETAIL);
         String uriImage = MovieConstants.getPosterHight(data.getPoster_path());
@@ -85,6 +86,7 @@ public class DetailActivity extends AppCompatActivity {
         getDataRecomendationList();
         sectionDataModels = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_recomedation);
+        recyclerView.setHasFixedSize(true);
         recyclerViewDataAdapter = new RecyclerViewDataAdapter(this, sectionDataModels);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(recyclerViewDataAdapter);
@@ -96,6 +98,8 @@ public class DetailActivity extends AppCompatActivity {
         getMovieReviews();
         reviews = new ArrayList<>();
         recycleReview = (RecyclerView) findViewById(R.id.rv_review);
+        recycleReview.setHasFixedSize(true);
+        recycleReview.getMinimumHeight();
         recyclerReviewAdapter = new RecyclerReviewAdapter(this, reviews);
         recycleReview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recycleReview.setAdapter(recyclerReviewAdapter);
@@ -186,7 +190,23 @@ public class DetailActivity extends AppCompatActivity {
         contentDetail = (TextView) findViewById(R.id.tv_detailContent);
         contentDetail.setText(data.getOverview());
         getImages();
+        share = (ImageButton) findViewById(R.id.share);
+        shareActions();
 
+    }
+
+    private void shareActions() {
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String shareBody = "[" + getString(R.string.app_name) + "] \nMovie name : " + data.getOriginal_title() + "\n\n" +
+                        data.getOverview() + "\n\n" +
+                        "\u2605 " + data.getVote_average() + "\n" +
+                        "Release date : " + data.getRelease_date() + "\n";
+
+                MovieConstants.shareText(shareBody, getString(R.string.app_name), DetailActivity.this);
+            }
+        });
     }
 
 

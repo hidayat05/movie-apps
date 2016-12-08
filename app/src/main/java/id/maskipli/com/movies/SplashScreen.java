@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
                 } finally {
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.transition.fade_in, R.transition.fade_out);
                 }
             }
         };
